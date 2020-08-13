@@ -6,3 +6,4 @@ sudo docker login 192.168.178.53
 echo Imagetag eingeben:
 read tag
 docker tag $name 192.168.178.53/bachelor2020/$name:$tag
+docker push 192.168.178.53/bachelor2020/$name:$tag
