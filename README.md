@@ -2,6 +2,7 @@
 
 
 # docker_build_and_push.sh
+
 #!/bin/bash
 echo Imagename eingeben:
 read name
