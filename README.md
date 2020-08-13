@@ -2,8 +2,7 @@
 
 
 # docker_build_and_push.sh
-Creates Docker Image
-Pushes Dockerimage to Harbor-Registry
+Creates Docker Image && Pushes Dockerimage to Harbor-Registry
 
 # docker_build_and_push_short.sh
 Short Version
