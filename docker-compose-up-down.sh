@@ -1,13 +1,13 @@
 #!/bin/bash
 cd /home/ba-admin/concourse/concourse-docker-master/
-echo  "concourse up"
+echo  "Concourse up"
 docker-compose up -d
 cd /home/ba-admin/harbor/
-echo  "harbor up"
+echo  "Harbor up"
 docker-compose up -d
 cd /home/ba-admin/elk/docker-elk-master/
-echo  "elk down"
+echo  "ELK down"
 docker-compose down -t 1
 cd /home/ba-admin/prometheus/prometheus-master/
-echo  "prometheus down"
+echo  "Prometheus down"
 docker-compose down -t 1
