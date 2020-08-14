@@ -1,8 +1,8 @@
 #!/bin/bash
 IMAGE_NAME=$1 # Parameter 1                                                                                                                                                                                                               
-IMAGE_TAG=$2 # Parameter 2                                                                                                                                                                                                                 echo "Building Image $IMAGE_NAME with tag $IMAGE_TAG"
-echo "Building Image $1 with tag $2"
-docker build -t $1 /home/ba-admin/dockerfile/
+IMAGE_TAG=${2:-latest} # Parameter 2 (if set, else use default: 'latest')                                                                                                                                                                                                                 echo "Building Image $IMAGE_NAME with tag $IMAGE_TAG"
+echo "Building Image $IMAGE_NAME with tag $IMAGE_TAG"
+docker build -t $IMAGE_NAME:$IMAGE_TAG .
 sudo docker login 192.168.178.53
-docker tag $1 192.168.178.53/bachelor2020/$1:$2
-docker push 192.168.178.53/bachelor2020/$1:$2
+docker tag $IMAGE_NAME 192.168.178.53/bachelor2020/$IMAGE_NAME:$IMAGE_TAG
+docker push 192.168.178.53/bachelor2020/$IMAGE_NAME:$IMAGE_TAG
