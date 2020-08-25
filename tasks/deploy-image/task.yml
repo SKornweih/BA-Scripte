@@ -1,0 +1,6 @@
+---
+platform: linux
+inputs:
+  - name: concourse-git
+run:
+  path: concourse-git/tasks/deploy-image/task.sh
