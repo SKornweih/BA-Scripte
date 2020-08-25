@@ -15,10 +15,6 @@ resources:
       uri: https://github.com/SKornweih/BA-Scripte/
       branch: master
 
-  - name: k8s
-    type: kubernetes
-    source:
-      kubeconfig: /home/ba-admin/.kube/config
 jobs:
   - name: build-and-publish-container
     serial: true
