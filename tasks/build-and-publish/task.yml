@@ -1,0 +1,11 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: starkandwayne/concourse
+    tag: 'latest'
+inputs:
+  - name: concourse-git
+run:
+  path: concourse-git/tasks/build-and-publish/task.sh
