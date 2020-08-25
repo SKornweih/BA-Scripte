@@ -1,0 +1,15 @@
+---
+resources:
+  - name: concourse-git
+    type: git
+    source:
+      uri: https://github.com/SKornweih/BA-Scripte/
+      branch: master
+jobs:
+  - name: build-and-publish
+    plan:
+    - get: concourse-git
+      trigger: true
+    - task: build-and-publish
+      file: concourse-git/tasks/build-and-publish/task.yml
+

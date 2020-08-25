@@ -1,15 +1,52 @@
+
 ---
+resource_types:
+  - name: harbor
+    type: docker-image
+    privileged: true
+    source:
+      repository: 192.168.178.53:80/bachelor2020/webserver
+      tag: latest
+      username: admin
+      password: Harbor12345
+
 resources:
   - name: concourse-git
     type: git
     source:
       uri: https://github.com/SKornweih/BA-Scripte/
       branch: master
+  - name: docker-image
+    type: docker-image
+    source:
+      repository: 192.168.178.53:80/bachelor2020/webserver
+      username: admin
+      password: Harbor12345
+  - name: k8s
+    type: kubernetes
+    source:
+      kubeconfig: minikube
+
 jobs:
-  - name: build-and-publish
+  - name: build-and-publish-container
+    serial: true
     plan:
     - get: concourse-git
       trigger: true
     - task: build-and-publish
       file: concourse-git/tasks/build-and-publish/task.yml
+
+  - name: check-compliance
+
+  - name: deploy-image
+    public: false
+    plan:
+      - get: docker-image
+        trigger: true
+        passed:
+          - deploy-image
+      - put: k8s
+        params:
+          kubectl: delete pods -l app=demo-cicd
+          wait_until_ready: 300
 
