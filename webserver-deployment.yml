@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apache2
+  name: apache2-webserver
+  namespace: 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache2
+  template:
+    metadata:
+      labels:
+        app: apache2
+    spec:
+      containers:
+      - image: 192.168.178.53:80/bachelor2020/apache2-webserver2
+        imagePullPolicy: Always
+        name: apache2-webserver2
+        ports:
+        - containerPort: 80
+          name: 80-tcp
+          protocol: TCP
+      imagePullSecrets:
+        - name: harborregcred
