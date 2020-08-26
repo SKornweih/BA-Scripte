@@ -1,0 +1,31 @@
+---
+resource_types:
+  - name: harbor
+	type: docker-image
+	privileged: true
+	source:
+	  repository: 192.168.178.53:80/bachelor2020/webserver
+	  tag: latest
+          username: admin
+	  password: Harbor12345
+
+resources:
+  - name: concourse-git
+    type: git
+    source:
+      uri: https://github.com/SKornweih/BA-Scripte/
+      branch: master
+
+jobs:
+  - name: build-and-publish-container
+      serial: true
+      plan:
+      - get: concourse-git
+        trigger: true
+      - task: build-and-publish
+        put: harbor
+        params:
+          build: concourse-git/
+
+jobs:
+  - ncheck-complianceame:
