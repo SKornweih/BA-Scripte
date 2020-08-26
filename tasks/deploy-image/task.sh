@@ -1,4 +1,10 @@
+
 #!/bin/bash
-kubectl create secret docker-registry harborregcred --docker-server='192.168.178.53:80' --docker-username='admin' --docker-password='Harbor12345' --docker-email='simon.kornweih@mialbox.org'
+
+kubectl config set-credentials kubernetes --username=kubernetes-admin --password=kubernetes-admin
+kubectl config set-cluster kubernetes  --insecure-skip-tls-verify=true --server=https://192.168.178.53:6443
+kubectl config set-context default/kubernetes  --user=kubernetes --namespace=default --cluster=kubernetes
+kubectl config use-context default/kubernetes
+kubectl config view
 kubectl apply -f concourse-git/kubectl-YAML/deployment.yml
 
