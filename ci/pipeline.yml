@@ -1,14 +1,24 @@
 ---
 resources:
-  - name: harbor
+  - name: harbor_security-in
     type: docker-image
     source:
+      repository: 192.168.178.53:80/security-in/webserver
+      tag: latest
+      insecure_registries: ["192.168.178.53:80"]
+      username: admin
+      password: Harbor12345
+
+resources:
+  - name: harbor
+    type: docker-image                                                                                                                                                                                                                           source:
       repository: 192.168.178.53:80/bachelor2020/webserver
       tag: latest
       insecure_registries: ["192.168.178.53:80"]
       username: admin
       password: Harbor12345
 
+resources:
   - name: concourse-git
     type: git
     source:
@@ -16,23 +26,14 @@ resources:
       branch: master
 
 jobs:
-  - name: build-container
+  - name: build-and-publish-container_security-in
     serial: true
     plan:
     - get: concourse-git
       trigger: true
-    - task: build-container
-      file: concourse-git/tasks/build-container/task.yml
-
-  - name: publish-container
-    serial: true
-    plan:
-    - get: concourse-git
-      trigger: true
-      passed:
-    - "build-container"
-    - task: publish-container
-      file: concourse-git/tasks/publish-container/task.yml
+    - put: harbor_security-in
+      params:
+        build: concourse-git/
 
   - name: deploy-image
     public: false
@@ -41,5 +42,5 @@ jobs:
       trigger: true
       passed:
         - "publish-container"
-    - task: deploy-image
-      file: concourse-git/tasks/deploy-image/task.yml
+ #   - task: deploy-image
+ #     file: concourse-git/tasks/deploy-image/task.yml
