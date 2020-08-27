@@ -9,7 +9,6 @@ resources:
       username: admin
       password: Harbor12345
 
-resources:
   - name: harbor
     type: docker-image                                                                                                                                                                                                                           source:
       repository: 192.168.178.53:80/bachelor2020/webserver
@@ -18,7 +17,6 @@ resources:
       username: admin
       password: Harbor12345
 
-resources:
   - name: concourse-git
     type: git
     source:
