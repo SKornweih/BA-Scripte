@@ -16,21 +16,30 @@ resources:
       branch: master
 
 jobs:
-  - name: build-and-publish-container
+  - name: build-container
     serial: true
     plan:
     - get: concourse-git
       trigger: true
-    - put: harbor
-      params:
-        build: concourse-git/
+    - task: build-container
+      file: concourse-git/tasks/build-container/task.yml
+
+  - name: publish-container
+    serial: true
+    plan:
+    - get: concourse-git
+      trigger: true
+      passed:
+    - "build-container"
+    - task: publish-container
+      file: concourse-git/tasks/publish-container/task.yml
 
   - name: deploy-image
     public: false
     plan:
-      - get: concourse-git
-        trigger: true
-        passed:
-          - "build-and-publish-container"
-#      - task: deploy-image
-#        file: concourse-git/tasks/deploy-image/task.yml
+    - get: concourse-git
+      trigger: true
+      passed:
+        - "publish-container"
+    - task: deploy-image
+      file: concourse-git/tasks/deploy-image/task.yml
