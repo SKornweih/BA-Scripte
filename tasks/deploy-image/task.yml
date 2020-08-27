@@ -3,7 +3,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: 192.168.178.53:80/bachelor2020/webserver
+    repository: 192.168.178.53:80/images/debian
     tag: latest
     insecure_registries: ["192.168.178.53:80"]
     username: admin
