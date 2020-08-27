@@ -5,4 +5,4 @@ kubectl config set-cluster kubernetes  --insecure-skip-tls-verify=true --server=
 kubectl config set-context kubernetes-admin@kubernetes  --user=kubernetes-admin --cluster=kubernetes
 kubectl config use-context kubernetes-admin@kubernetes
 kubectl config view
-kubectl apply -f concourse-git/kubectl-YAML/deployment.yml
+kubectl apply -f concourse-git/kubectl-YAML/deployment.yml --user=kubernetes-admin
