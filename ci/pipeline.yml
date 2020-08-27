@@ -32,5 +32,5 @@ jobs:
         trigger: true
         passed:
           - "build-and-publish-container"
-      - task: deploy-image
-        file: concourse-git/tasks/deploy-image/task.yml
+#      - task: deploy-image
+#        file: concourse-git/tasks/deploy-image/task.yml
