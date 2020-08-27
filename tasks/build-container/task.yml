@@ -8,4 +8,4 @@ image_resource:
 inputs:
   - name: concourse-git
 run:
-  path: concourse-git/tasks/build-and-publish/task.sh
+  path: concourse-git/tasks/built-container/task.sh
