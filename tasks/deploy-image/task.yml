@@ -1,5 +1,6 @@
 ---
 platform: linux
+
 image_resource:
   type: docker-image
   source:
@@ -8,7 +9,9 @@ image_resource:
     insecure_registries: ["192.168.178.53:80"]
     username: admin
     password: Harbor12345
+
 inputs:
   - name: concourse-git
+
 run:
   path: concourse-git/tasks/deploy-image/task.sh
