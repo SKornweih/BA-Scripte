@@ -25,12 +25,23 @@ jobs:
       params:
         build: concourse-git/
 
-  - name: deploy-image-security-in
+  - name: check-security-in
     public: false
     plan:
     - get: concourse-git
       trigger: true
       passed:
         - "build-and-publish-container-security-in"
+    - put: harbor-security-in
+      params:
+        check: harbor-security-in
+
+  - name: deploy-image-security-in
+    public: false
+    plan:
+    - get: concourse-git
+      trigger: true
+      passed:
+        - "check-security-in"
     - task: deploy-image
       file: concourse-git/tasks/deploy-image_security-in/task.yml
