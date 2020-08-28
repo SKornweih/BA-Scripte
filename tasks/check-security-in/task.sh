@@ -11,10 +11,10 @@ while true; do
     curl -sku "admin:Harbor12345" -H "Accept: application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0" --header "Content-Type: application/json" -X GET "https://192.168.178.58$VULN_PATH" | jq '.' -r  >> res.txt
     severity=$(grep -a -m 1 -h -r 'severity' res.txt)
     if [[ $severity == 'severity": "Critical",' ]]; then
-      echo "failed the clair test with" + $severity 
+      echo "failed the clair test with" $severity 
       exit 1
     else    
-      echo "passed the clair test with" + $severity   
+      echo "passed the clair test with" $severity   
       exit 0
     fi
 echo $severity
