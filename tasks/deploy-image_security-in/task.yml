@@ -4,9 +4,9 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: 192.168.178.53:80/bachelor2020/webserver
+    repository: 192.168.178.58:80/security-in/webserver
     tag: latest
-    insecure_registries: ["192.168.178.53:80"]
+    insecure_registries: ["192.168.178.58:80"]
     username: admin
     password: Harbor12345
 
@@ -14,4 +14,4 @@ inputs:
   - name: concourse-git
 
 run:
-  path: concourse-git/tasks/deploy-image/task.sh
+  path: concourse-git/tasks/deploy-image_security-in/task.sh

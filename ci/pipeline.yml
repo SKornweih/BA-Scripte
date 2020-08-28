@@ -1,6 +1,6 @@
 ---
 resources:
-  - name: harbor_security-in
+  - name: harbor-security-in
     type: docker-image
     source:
       repository: 192.168.178.58:80/security-in/webserver
@@ -16,21 +16,21 @@ resources:
       branch: master
 
 jobs:
-  - name: build-and-publish-container_security-in
+  - name: build-and-publish-container-security-in
     serial: true
     plan:
     - get: concourse-git
       trigger: true
-    - put: harbor_security-in
+    - put: harbor-security-in
       params:
         build: concourse-git/
 
-#  - name: deploy-image
-#    public: false
-#    plan:
-#    - get: concourse-git
-#      trigger: true
-#      passed:
-#        - "build-and-publish-container_security-in"
-#   - task: deploy-image
-#     file: concourse-git/tasks/deploy-image/task.yml
+  - name: deploy-image-security-in
+    public: false
+    plan:
+    - get: concourse-git
+      trigger: true
+      passed:
+        - "build-and-publish-container-security-in"
+    - task: deploy-image
+      file: concourse-git/tasks/deploy-image_security-in/task.yml
