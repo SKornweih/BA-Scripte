@@ -32,9 +32,8 @@ jobs:
       trigger: true
       passed:
         - "build-and-publish-container-security-in"
-    - put: harbor-security-in
-      params:
-        check: harbor-security-in
+    - task: deploy-image
+      file: concourse-git/tasks/check-security-in/task.yml
 
   - name: deploy-image-security-in
     public: false
