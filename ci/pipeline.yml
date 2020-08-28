@@ -32,7 +32,7 @@ jobs:
       trigger: true
       passed:
         - "build-and-publish-container-security-in"
-    - task: deploy-image
+    - task: start-and-check-clair
       file: concourse-git/tasks/check-security-in/task.yml
 
   - name: deploy-image-security-in
