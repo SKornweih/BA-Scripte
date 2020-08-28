@@ -9,3 +9,4 @@ echo "Apply security-in_deployment with:"
 cat concourse-git/kubectl-YAML/security-in_deployment.yml
 kubectl apply -f concourse-git/kubectl-YAML/security-in_deployment.yml
 echo "security-in_deployment applyed"
+kubectl get deployment -n  security-in
