@@ -1,9 +1,9 @@
 ---
 resources:
-  - name: harbor-security-in
+  - name: harbor-lab
     type: docker-image
     source:
-      repository: 192.168.178.58:80/security-in/webserver
+      repository: 192.168.178.58:80/lab/webserver
       tag: latest
       insecure_registries: ["192.168.178.58:80"]
       username: admin
@@ -16,31 +16,31 @@ resources:
       branch: master
 
 jobs:
-  - name: build-and-publish-container-security-in
+  - name: build-push-container-lab
     serial: true
     plan:
     - get: concourse-git
       trigger: true
-    - put: harbor-security-in
+    - put: harbor-lab
       params:
         build: concourse-git/
 
-  - name: check-security-in
+  - name: check-lab-container-security
     public: false
     plan:
     - get: concourse-git
       trigger: true
       passed:
-        - "build-and-publish-container-security-in"
-    - task: start-and-check-clair
-      file: concourse-git/tasks/check-security-in/task.yml
+        - "build-push-container-lab"
+    - task: start-and-check-with-clair
+      file: concourse-git/tasks/check-lab-container-security/task.yml
 
-  - name: deploy-image-security-in
+  - name: deploy-image-lab
     public: false
     plan:
     - get: concourse-git
       trigger: true
       passed:
-        - "check-security-in"
-    - task: deploy-image
-      file: concourse-git/tasks/deploy-image_security-in/task.yml
+        - "check-lab-container-security"
+    - task: deploy-image-lab
+      file: concourse-git/tasks/deploy-image-lab/task.yml

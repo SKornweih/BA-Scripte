@@ -5,7 +5,7 @@ metadata:
   labels:
     app: apache2
   name: webserver
-  namespace: security-in
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
         app: apache2
     spec:
       containers:
-      - image: 192.168.178.58:80/security-in/webserver:latest
+      - image: 192.168.178.58:80/lab/webserver:latest
         imagePullPolicy: Always
         name: webserver
         ports:

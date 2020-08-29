@@ -4,7 +4,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: 192.168.178.58:80/security-in/webserver
+    repository: 192.168.178.58:80/lab/webserver
     tag: latest
     insecure_registries: ["192.168.178.58:80"]
     username: admin
@@ -14,4 +14,4 @@ inputs:
   - name: concourse-git
 
 run:
-  path: concourse-git/tasks/deploy-image_security-in/task.sh
+  path: concourse-git/tasks/deploy-image-lab/task.sh

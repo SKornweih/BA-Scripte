@@ -1,8 +1,8 @@
 #!/bin/bash
-curl -sku "admin:Harbor12345" --header "Content-Type: application/json" -H "Accept: application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0" -X POST "https://192.168.178.58/api/v2.0/projects/security-in/repositories/webserver/artifacts/latest/scan"
+curl -sku "admin:Harbor12345" --header "Content-Type: application/json" -H "Accept: application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0" -X POST "https://192.168.178.58/api/v2.0/projects/lab/repositories/webserver/artifacts/latest/scan"
 echo "Start checking last Image..."
 #sleep 10
-VULN_PATH=$(curl -sku "admin:Harbor12345" --header "Content-Type: application/json" -H "Accept: application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0" -X GET "https://192.168.178.58/api/v2.0/projects/security-in/repositories/webserver/artifacts/" | jq '.[].addition_links.vulnerabilities.href' -r)
+VULN_PATH=$(curl -sku "admin:Harbor12345" --header "Content-Type: application/json" -H "Accept: application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0" -X GET "https://192.168.178.58/api/v2.0/projects/lab/repositories/webserver/artifacts/" | jq '.[].addition_links.vulnerabilities.href' -r)
 RES=$(curl -sku "admin:Harbor12345" -H "Accept: application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0" --header "Content-Type: application/json" -X GET "https://192.168.178.58$VULN_PATH")
 while true; do
 
@@ -13,10 +13,10 @@ while true; do
     curl -sku "admin:Harbor12345" -H "Accept: application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0" --header "Content-Type: application/json" -X GET "https://192.168.178.58$VULN_PATH" | jq '.' -r  >> res.txt
     severity=$(grep -a -m 1 -h -r 'severity' res.txt)
     if [[ $severity == 'severity": "Critical",' ]]; then
-      echo "Image failed the Clair-Test with" $severity 
+      echo "Image failed the Clair-Test with" $severity
       exit 1
-    else    
-      echo "Image passed the Clair-Test with" $severity   
+    else
+      echo "Image passed the Clair-Test with" $severity
       exit 0
     fi
 echo $severity
