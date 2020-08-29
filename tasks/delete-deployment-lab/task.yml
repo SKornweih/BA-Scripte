@@ -1,0 +1,18 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: 192.168.178.58:80/lab/webserver
+    tag: latest
+    insecure_registries: ["192.168.178.58:80"]
+    username: admin
+    password: Harbor12345
+
+inputs:
+  - name: concourse-git
+
+run:
+  path: concourse-git/tasks/delete-deployment-lab/task.sh
+  

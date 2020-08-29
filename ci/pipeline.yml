@@ -74,3 +74,13 @@ jobs:
         - "deploy-container-prod"
     - task: check-lab-container-running
       file: concourse-git/tasks/check-prod-container-running/task.yml
+
+  - name: delete-deployment-lab
+    public: false
+    plan:
+    - get: concourse-git
+      trigger: true
+      passed:
+        - "check-prod-container-running"
+    - task: delete-deployment-lab
+      file: concourse-git/tasks/delete-deployment-lab/task.yml
