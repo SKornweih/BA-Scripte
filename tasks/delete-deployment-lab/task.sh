@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 echo "Setting kubeconfig..."
 mkdir -p $HOME/.kube
 cp -i concourse-git/kubectl-YAML/admin.conf $HOME/.kube/config
