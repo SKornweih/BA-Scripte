@@ -8,6 +8,6 @@ RUN chmod +x ./kubectl
 RUN mv ./kubectl /usr/local/bin/kubectl
 RUN kubectl version --client
 RUN mkdir -p $HOME/.kube
-RUN cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+COPY /etc/kubernetes/admin.conf $HOME/.kube/config
 RUN chown $(id -u):$(id -g) $HOME/.kube/config
 CMD service apache2 start && tail -f /var/log/apache2/access.log
