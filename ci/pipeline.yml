@@ -44,3 +44,13 @@ jobs:
         - "check-lab-container-security"
     - task: deploy-image-lab
       file: concourse-git/tasks/deploy-image-lab/task.yml
+  
+  - name: check-lab-container-running
+    public: false
+    plan:
+    - get: concourse-git
+      trigger: true
+      passed:
+        - "deploy-image-lab"
+    - task: check-lab-container-running
+      file: concourse-git/tasks/check-lab-container-running/task.yml
