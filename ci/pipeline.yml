@@ -35,14 +35,14 @@ jobs:
     - task: start-and-check-with-clair
       file: concourse-git/tasks/check-lab-container-security/task.yml
 
-  - name: deploy-image-lab
+  - name: deploy-container-lab
     public: false
     plan:
     - get: concourse-git
       trigger: true
       passed:
         - "check-lab-container-security"
-    - task: deploy-image-lab
+    - task: deploy-container-lab
       file: concourse-git/tasks/deploy-image-lab/task.yml
   
   - name: check-lab-container-running
@@ -51,6 +51,26 @@ jobs:
     - get: concourse-git
       trigger: true
       passed:
-        - "deploy-image-lab"
+        - "deploy-container-lab"
     - task: check-lab-container-running
       file: concourse-git/tasks/check-lab-container-running/task.yml
+
+  - name: deploy-container-prod
+    public: false
+    plan:
+    - get: concourse-git
+      trigger: true
+      passed:
+        - "check-lab-container-running"
+    - task: deploy-container-prod
+      file: concourse-git/tasks/deploy-image-prod/task.yml
+
+  - name: check-prod-container-running
+    public: false
+    plan:
+    - get: concourse-git
+      trigger: true
+      passed:
+        - "deploy-container-prod"
+    - task: check-lab-container-running
+      file: concourse-git/tasks/check-prod-container-running/task.yml
