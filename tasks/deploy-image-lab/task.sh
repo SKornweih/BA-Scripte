@@ -7,12 +7,12 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 sleep 3
 
 echo "Kubeconfig set"
-echo "Apply security-in_deployment with:"
+echo "Apply LAB-Deployment with:"
 cat concourse-git/kubectl-YAML/lab-deployment.yml
 
 kubectl apply -f concourse-git/kubectl-YAML/lab-deployment.yml
 
-echo "security-in_deployment applyed"
+echo "LAB-Deployment applyed"
 
 sleep 10
 kubectl get deployment -n  lab
