@@ -1,9 +1,9 @@
 ---
 resources:
-  - name: harbor-lab
+  - name: harbor-app
     type: docker-image
     source:
-      repository: 192.168.178.58:80/lab/webserver
+      repository: 192.168.178.58:80/app/webserver
       tag: latest
       insecure_registries: ["192.168.178.58:80"]
       username: admin
@@ -21,7 +21,7 @@ jobs:
     plan:
     - get: concourse-git
       trigger: true
-    - put: harbor-lab
+    - put: harbor-app
       params:
         build: concourse-git/
 
