@@ -7,4 +7,5 @@ RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -
 RUN chmod +x ./kubectl
 RUN mv ./kubectl /usr/local/bin/kubectl
 RUN kubectl version --client
+RUN echo "Hello"
 CMD service apache2 start && tail -f /var/log/apache2/access.log
