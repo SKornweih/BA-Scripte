@@ -8,7 +8,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 sleep 3
 
-echo "Kubeconfig set"
-echo "Delete Deployment..."
+echo "kubeconfig set"
+echo "Delete Deployment LAB..."
 
 kubectl delete deployment webserver -n lab 
