@@ -17,7 +17,8 @@ while true; do
     severity=$(grep -a -m 1 -h -r 'severity' res.txt)
     if [[ $severity == 'severity": "Critical",' ]]; then
       echo "Image failed the Clair-Test" $severity
-      exit 1
+    rm res.txt  
+    exit 1
     else
       echo "Image passed the Clair-Test" $severity
       exit 0
