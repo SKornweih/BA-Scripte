@@ -16,7 +16,7 @@ PODSTATUS=$(grep -o "1/1" pods-status.txt)
 
 kubectl get pods -n lab
 
-if [[ $PODSTATUS == "1/1" ]]; then
+if [[ $PODSTATUS == "2/2" ]]; then
   echo "Pod Status: Running..."
   rm pods-status.txt
 else
