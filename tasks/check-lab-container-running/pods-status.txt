@@ -1,2 +1,0 @@
-NAME                         READY   STATUS    RESTARTS   AGE
-webserver-68dc54f9c5-sj98z   1/1     Running   0          20m
