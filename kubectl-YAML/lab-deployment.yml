@@ -7,7 +7,7 @@ metadata:
   name: webserver
   namespace: lab
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: apache2
