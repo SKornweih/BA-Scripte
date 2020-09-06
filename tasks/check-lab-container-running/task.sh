@@ -8,19 +8,19 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 sleep 3
 
 echo "Kubeconfig set"
-echo "Checking Pod-Status..."
+echo "Checking Deployment-Status..."
 
-kubectl get pods -n lab  >> pods-status.txt 
+kubectl get pods -n lab  >> deployment-status.txt 
 
-PODSTATUS=$(grep -o "1/1" pods-status.txt)
+PODSTATUS=$(grep -o "2/2" deployment-status.txt)
 
 kubectl get pods -n lab
 
 if [[ $PODSTATUS == "2/2" ]]; then
-  echo "Pod Status: Running..."
-  rm pods-status.txt
+  echo "Deployment Status: 2/2."
+  rm deployment-status.txt
 else
-  echo "Pod Status: Not Running..."
-  rm pods-status.txt
+  echo "Deployment Status: 0/2"
+  rm deployment-status.txt
 exit 1
 fi
