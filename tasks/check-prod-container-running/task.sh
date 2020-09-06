@@ -11,7 +11,7 @@ echo "Kubeconfig set"
 echo "Checking Pod-Status..."
 
 kubectl get pods -n prod  >> pods-status.txt
-PODSTATUS=$(grep -o "1/1" pods-status.txt)
+PODSTATUS=$(grep -o "2/2" pods-status.txt)
 kubectl get pods -n prod
 
 if [[ $PODSTATUS == "2/2" ]]; then
