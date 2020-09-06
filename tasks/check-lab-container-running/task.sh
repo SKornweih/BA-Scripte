@@ -10,7 +10,7 @@ sleep 3
 echo "Kubeconfig set"
 echo "Checking Deployment-Status..."
 
-kubectl get pods -n lab  >> deployment-status.txt 
+kubectl get deployment -n lab  >> deployment-status.txt 
 
 PODSTATUS=$(grep -o "2/2" deployment-status.txt)
 
