@@ -2,8 +2,7 @@
 curl -LO https://github.com/goharbor/harbor/releases/download/v2.0.2/harbor-online-installer-v2.0.2.tgz
 tar xvf harbor-online-installer-v2.0.2.tgz
 openssl genrsa -out ca.key 4096
-openssl req -x509 -new -nodes -sha512 -days 3650 \
- -subj "/C=CN/ST=Peine/L=Peine/O=example/OU=Personal/CN=debian-host" -key ca.key -out ca.crt
+openssl req -x509 -new -nodes -sha512 -days 3650 -subj "/C=CN/ST=Peine/L=Peine/O=example/OU=Personal/CN=debian-host" -key ca.key -out ca.crt
 openssl genrsa -out debian-host.key 4096
 openssl req -sha512 -new -subj "/C=CN/ST=Peine/L=Peine/O=example/OU=Personal/CN=debian-host" -key debian-host.key -out debian-host.csr
 cat > v3.ext <<-EOF
