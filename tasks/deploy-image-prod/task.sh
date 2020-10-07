@@ -7,10 +7,10 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 sleep 3
 
 echo "Kubeconfig set"
-echo "Apply security-in_deployment with:"
+echo "Apply PROD-Deployment with:"
 cat concourse-git/kubectl-YAML/prod-deployment.yml
 kubectl apply -f concourse-git/kubectl-YAML/prod-deployment.yml
 
-echo "security-in_deployment applyed"
+echo "PROD-Deployment applyed"
 sleep 10
 kubectl get deployment -n  prod
