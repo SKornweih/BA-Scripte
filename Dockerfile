@@ -1,5 +1,5 @@
 FROM docker.io/debian
-MAINTAINER Simon K.
+MAINTAINER Simon Kornweih
 LABEL version="1.0"
 EXPOSE 80
 RUN apt-get update && apt-get upgrade -y && apt-get install apache2  -y
